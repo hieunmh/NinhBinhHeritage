@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import EventScreen from '../screens/EventScreen';
+import Home from '../screens/Home';
+import Event from '../screens/Event';
 import Attraction from '../screens/Attraction';
 import Map from '../screens/Map';
 import Service from '../screens/Service';
@@ -24,10 +24,13 @@ const Tabs = () => {
           borderRadius: 0,
           height: 60,
           paddingBottom: 5,
+          position: 'absolute',
         },
+        tabBarHideOnKeyboard: true,
       }}
+
     >
-      <Tab.Screen name='Trang chủ' component={HomeScreen} 
+      <Tab.Screen name='Trang chủ' component={Home} 
         options={{
           tabBarLabel: 'Trang chủ',
           headerShown: true,
@@ -75,7 +78,7 @@ const Tabs = () => {
         }}
       />
   
-      <Tab.Screen name='Sự kiện' component={EventScreen} 
+      <Tab.Screen name='Sự kiện' component={Event} 
         options={{
           tabBarLabel: 'Sự kiện',
           headerShown: false,
