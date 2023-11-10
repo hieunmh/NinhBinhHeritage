@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
-import Event from '../screens/Event';
-import Attraction from '../screens/Attraction';
-import Map from '../screens/Map';
-import Service from '../screens/Service';
+import HomeScreen from '../screens/Home';
+import EventScreen from '../screens/Event';
+import AttractionScreen from '../screens/Attraction';
+import MapScreen from '../screens/Map';
+import ServiceScreen from '../screens/Service';
 
-import { Entypo } from '@expo/vector-icons'; 
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +30,7 @@ const Tabs = () => {
       }}
 
     >
-      <Tab.Screen name='Trang chủ' component={Home} 
+      <Tab.Screen name='Trang chủ' component={HomeScreen}
         options={{
           tabBarLabel: 'Trang chủ',
           headerShown: true,
@@ -46,7 +46,7 @@ const Tabs = () => {
         }}
       />
 
-      <Tab.Screen name='Di tích' component={Attraction} 
+      <Tab.Screen name='Di tích' component={AttractionScreen}
         options={{
           tabBarLabel: 'Di tích',
           headerShown: false,
@@ -62,7 +62,7 @@ const Tabs = () => {
         }}
       />
 
-      <Tab.Screen name='Bản đồ' component={Map} 
+      <Tab.Screen name='Bản đồ' component={MapScreen}
         options={{
           tabBarLabel: 'Bản đồ',
           headerShown: false,
@@ -77,8 +77,8 @@ const Tabs = () => {
           }
         }}
       />
-  
-      <Tab.Screen name='Sự kiện' component={Event} 
+
+      <Tab.Screen name='Sự kiện' component={EventScreen}
         options={{
           tabBarLabel: 'Sự kiện',
           headerShown: false,
@@ -94,7 +94,7 @@ const Tabs = () => {
         }}
       />
 
-      <Tab.Screen name='Dịch vụ' component={Service} 
+      <Tab.Screen name='Dịch vụ' component={ServiceScreen}
         options={{
           tabBarLabel: 'Dịch vụ',
           headerShown: false,
@@ -108,7 +108,7 @@ const Tabs = () => {
             fontSize: 12
           }
         }}
-        
+
       />
     </Tab.Navigator>
   )

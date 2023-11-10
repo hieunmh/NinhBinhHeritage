@@ -1,15 +1,13 @@
 import { SafeAreaView } from "react-native";
 import { Text, View } from 'react-native';
+import { WebView } from 'react-native-webview';
 
-export default EventScreen = () => {
+export default MapScreen = () => {
   return (
-    <SafeAreaView>
-      <View className="flex-row items-center justify-between px-8">
-        <View>
-          <Text className="text-4xl text-[#0B646B] font-bold">Ban Do</Text>
-          <Text className="text-[#527283] text-3xl">Event screen</Text>
-        </View>
-      </View>
-    </SafeAreaView>
+    <View className="flex-1 bg-white relative pt-8">
+      <WebView
+        source={{ uri: 'https://www.openstreetmap.org/#map=19/21.03817/105.78329' }}
+      />
+    </View>
   )
 }

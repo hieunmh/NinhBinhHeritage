@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native";
 import { Text, View } from 'react-native';
 
-export default EventScreen = () => {
+export default AttractionScreen = () => {
   return (
     <SafeAreaView>
       <View className="flex-row items-center justify-between px-8">
