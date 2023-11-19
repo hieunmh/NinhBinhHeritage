@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/Home';
 import EventScreen from '../screens/Event';
 import AttractionScreen from '../screens/Attraction';
 import MapScreen from '../screens/Map';
@@ -30,25 +29,9 @@ const Tabs = () => {
       }}
 
     >
-      <Tab.Screen name='Trang chủ' component={HomeScreen}
+      <Tab.Screen name='Trang chủ' component={AttractionScreen}
         options={{
           tabBarLabel: 'Trang chủ',
-          headerShown: true,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Entypo name="home" size={24} color="#fca906" />
-            ) : (
-              <Entypo name="home" size={24} color="#c0c8ca" />
-            ),
-          tabBarLabelStyle: {
-            fontSize: 12
-          }
-        }}
-      />
-
-      <Tab.Screen name='Di tích' component={AttractionScreen}
-        options={{
-          tabBarLabel: 'Di tích',
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
