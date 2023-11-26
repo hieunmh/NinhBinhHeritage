@@ -2,7 +2,7 @@ import { SafeAreaView } from "react-native";
 import { Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-export default MapScreen = () => {
+const MapScreen = () => {
   return (
     <View className="flex-1 bg-white relative pt-8">
       <WebView
@@ -11,3 +11,5 @@ export default MapScreen = () => {
     </View>
   )
 }
+
+export default MapScreen;
