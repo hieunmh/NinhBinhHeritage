@@ -1,12 +1,14 @@
-import { Text, View, SafeAreaView, Image, TextInput, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, Image, TextInput, ScrollView, Dimensions } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import filterVN from '../filterVN';
 
+const screenWidth = Dimensions.get('window').width;
 export default EventScreen = () => {
 
   let [searchIp, setSearchIp] = useState('');
   let [active, setActive] = useState(0);
+  const step = useRef(null);
 
   const attractions = [
     {
@@ -47,6 +49,19 @@ export default EventScreen = () => {
     },
   ]
 
+  useEffect(() => {
+    if (attractions.length > 0) {
+      let index = 0;
+      setInterval(() => {
+        step.current.scrollTo({ x: index * screenWidth, y: 0, animated: true });
+        index += 1;
+        if (index === attractions.length) {
+          index = 0;
+        }
+      }, 3000);
+    }
+  }, [])
+
   onchange = (nativeEvent) => {
     const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width - 0.1);
     if (slide != active) {
@@ -59,10 +74,12 @@ export default EventScreen = () => {
       <View className="w-full h-1/3">
         <ScrollView
           onScroll={({ nativeEvent }) => onchange(nativeEvent)}
-          showsVerticalScrollIndicator={false}
+          scrollEventThrottle={16}
+          showsHorizontalScrollIndicator={false}
           pagingEnabled
           horizontal
           className='flex w-full h-full'
+          ref={step}
         >
           {
             attractions.map(attraction =>
@@ -95,6 +112,7 @@ export default EventScreen = () => {
 
         <View>
           <Text className='text-[#DC812D] text-xl font-bold'>Các Di tích tại Ninh Bình</Text>
+          <Text className='text-xl font-bold'>{active}</Text>
         </View>
       </View>
 
