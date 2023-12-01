@@ -1,4 +1,10 @@
 # NINH BINH HERITAGE
+## RUN
+```bash
+npm install
+npm run android
+```
+
 ## Technology
 - _React Native with Expo_
 - _React Navigation_: Navigation between screens
