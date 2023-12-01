@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native";
 import { Text, View } from 'react-native';
 
-export default ServiceScreen = () => {
+const ServiceScreen = () => {
   return (
     <SafeAreaView>
       <View className="flex-row items-center justify-between px-8">
@@ -13,3 +13,5 @@ export default ServiceScreen = () => {
     </SafeAreaView>
   )
 }
+
+export default ServiceScreen;

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import filterVN from '../filterVN';
 
 const screenWidth = Dimensions.get('window').width;
-export default EventScreen = () => {
+const EventScreen = () => {
 
   let [searchIp, setSearchIp] = useState('');
   let [active, setActive] = useState(0);
@@ -163,3 +163,5 @@ export default EventScreen = () => {
     </SafeAreaView>
   )
 }
+
+export default EventScreen;
