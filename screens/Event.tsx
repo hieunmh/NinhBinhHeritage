@@ -63,10 +63,10 @@ const EventScreen = () => {
           <TextInput defaultValue={searchIp} onChangeText={text => setSearchIp(text)}
             placeholder='Tìm kiếm...' className='h-12 w-full text-lg pl-4'
             onPressIn={(e) => {
-              if (e.nativeEvent.key == 'Enter') {
+              // if (e.nativeEvent.key == 'Enter') {
 
-                e.target.blur()
-              }
+              //   e.target.blur()
+              // }
             }}
           />
         </View>
@@ -78,8 +78,8 @@ const EventScreen = () => {
 
       <ScrollView className='mt-2 mb-[60px]'>
         <View className={`flex flex-row px-4 py-4 items-center justify-between`}>
-          <Image
-            className='w-[150px] h-[100px] rounded-xl animate-spin bg-gray-400'
+          <Image className='w-[150px] h-[100px] rounded-xl animate-spin bg-gray-400'
+            source={{ uri: '' }}
           />
 
           <View className='text-center'>
@@ -90,9 +90,9 @@ const EventScreen = () => {
 
         {filterEvent.map((event, id) => (
           <View key={id} className={`flex flex-row px-4 py-4 items-center justify-between ${id % 2 == 0 ? 'bg-[#f1f1f1]' : ''}`}>
-            <Image
-              src='https://baoninhbinh.org.vn/DATA/ARTICLES/2022/11/15/-emagazine-su-kien-festival-trang-an-ket-noi-di-san-ninh-e07ee.jpg'
-              className='w-[150px] h-[100px] rounded-xl'
+            <Image alt=''
+              className='w-[150px] h-[100px] rounded-xl' 
+              source={{ uri: 'https://baoninhbinh.org.vn/DATA/ARTICLES/2022/11/15/-emagazine-su-kien-festival-trang-an-ket-noi-di-san-ninh-e07ee.jpg' }}
             />
 
             <View className='text-center'>
