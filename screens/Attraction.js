@@ -9,6 +9,7 @@ export default EventScreen = () => {
   let [searchIp, setSearchIp] = useState('');
   let [active, setActive] = useState(0);
   const step = useRef(null);
+  const intervalRef = useRef(null);
 
   const attractions = [
     {
@@ -49,21 +50,45 @@ export default EventScreen = () => {
     },
   ]
 
+  // useEffect(() => {
+  //   if (attractions.length > 0) {
+  //     let index = 0;
+  //     let interval = setInterval(() => {
+  //       step.current.scrollTo({ x: index * screenWidth, y: 0, animated: true });
+  //       index += 1;
+  //       if (index === attractions.length) {
+  //         index = 0;
+  //       }
+  //     }, 3000);
+
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [])
+
   useEffect(() => {
     if (attractions.length > 0) {
       let index = 0;
-      setInterval(() => {
-        step.current.scrollTo({ x: index * screenWidth, y: 0, animated: true });
-        index += 1;
-        if (index === attractions.length) {
-          index = 0;
+      const autoScroll = () => {
+        if (active === attractions.length - 1) {
+          step.current.scrollTo({ x: 0, y: 0, animated: true });
+        } else {
+          step.current.scrollTo({ x: (active + 1) * screenWidth, y: 0, animated: true });
         }
-      }, 3000);
-    }
-  }, [])
+      };
+      console.log(active);
+      intervalRef.current = setInterval(autoScroll, 3000);
 
-  onchange = (nativeEvent) => {
-    const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width - 0.1);
+      return () => clearInterval(intervalRef.current);
+    }
+  }, [active]);
+
+  const onchange = (nativeEvent) => {
+    let slide = 0;
+    if (nativeEvent.contentOffset.x != 0) {
+      slide = Math.floor((nativeEvent.contentOffset.x + screenWidth / 2) / screenWidth);
+    } else {
+      slide = 0;
+    }
     if (slide != active) {
       setActive(slide);
     }
@@ -112,7 +137,6 @@ export default EventScreen = () => {
 
         <View>
           <Text className='text-[#DC812D] text-xl font-bold'>Các Di tích tại Ninh Bình</Text>
-          <Text className='text-xl font-bold'>{active}</Text>
         </View>
       </View>
 
