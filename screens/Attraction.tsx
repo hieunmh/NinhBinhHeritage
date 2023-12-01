@@ -2,7 +2,7 @@ import { Text, View, SafeAreaView, Image, TextInput, ScrollView, Dimensions } fr
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import filterVN from '../filterVN';
-
+import { attractions } from '../data/index.js';
 const screenWidth = Dimensions.get('window').width;
 
 interface Attraction {
@@ -18,45 +18,6 @@ const AttractionScreen = () => {
   let [active, setActive] = useState(0);
   const step = useRef<ScrollView>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  const attractions = [
-    {
-      id: 0,
-      name: 'Tràng An',
-      description: 'Hello',
-      image: 'https://ik.imagekit.io/tvlk/blog/2022/11/khu-du-lich-trang-an-2.jpg?tr=dpr-2,w-675'
-    },
-    {
-      id: 1,
-      name: 'Tam Cốc - Bích Động',
-      description: 'Hello',
-      image: 'https://static-images.vnncdn.net/files/publish/2023/7/8/ninh-binh-anh-so-du-lich-cc-1021-864.jpeg'
-    },
-    {
-      id: 2,
-      name: 'Hoa Lư',
-      description: 'Hello',
-      image: 'https://ik.imagekit.io/tvlk/blog/2023/05/co-do-hoa-lu-2.jpg?tr=dpr-2,w-675'
-    },
-    {
-      id: 3,
-      name: 'Hang Múa - Núi Múa',
-      description: 'Hello',
-      image: 'https://vcdn-dulich.vnecdn.net/2018/08/21/21-8-201839-301609698-w500-2654-1534827477.png'
-    },
-    {
-      id: 4,
-      name: 'Chùa Bái Đính',
-      description: 'Hello',
-      image: 'https://ik.imagekit.io/tvlk/blog/2022/08/chua-bai-dinh-1.jpg'
-    },
-    {
-      id: 5,
-      name: 'Non Nước',
-      description: 'Hello',
-      image: 'https://postumtravel.vn/wp-content/uploads/2022/07/nui-non-nuoc-2.jpg'
-    },
-  ]
 
   useEffect(() => {
     if (attractions.length > 0) {
