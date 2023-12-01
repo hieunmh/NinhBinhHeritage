@@ -4,12 +4,20 @@ import { useEffect, useRef, useState } from 'react';
 import filterVN from '../filterVN';
 
 const screenWidth = Dimensions.get('window').width;
-const EventScreen = () => {
+
+interface Attraction {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+}
+
+const AttractionScreen = () => {
 
   let [searchIp, setSearchIp] = useState('');
   let [active, setActive] = useState(0);
-  const step = useRef(null);
-  const intervalRef = useRef(null);
+  const step = useRef<ScrollView>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const attractions = [
     {
@@ -50,39 +58,27 @@ const EventScreen = () => {
     },
   ]
 
-  // useEffect(() => {
-  //   if (attractions.length > 0) {
-  //     let index = 0;
-  //     let interval = setInterval(() => {
-  //       step.current.scrollTo({ x: index * screenWidth, y: 0, animated: true });
-  //       index += 1;
-  //       if (index === attractions.length) {
-  //         index = 0;
-  //       }
-  //     }, 3000);
-
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [])
-
   useEffect(() => {
     if (attractions.length > 0) {
       let index = 0;
       const autoScroll = () => {
         if (active === attractions.length - 1) {
-          step.current.scrollTo({ x: 0, y: 0, animated: true });
+          step.current?.scrollTo({ x: 0, y: 0, animated: true });
         } else {
-          step.current.scrollTo({ x: (active + 1) * screenWidth, y: 0, animated: true });
+          step.current?.scrollTo({ x: (active + 1) * screenWidth, y: 0, animated: true });
         }
       };
-      console.log(active);
       intervalRef.current = setInterval(autoScroll, 3000);
 
-      return () => clearInterval(intervalRef.current);
+      return () => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      };
     }
   }, [active]);
 
-  const onchange = (nativeEvent) => {
+  const onchange = (nativeEvent: any) => {
     let slide = 0;
     if (nativeEvent.contentOffset.x != 0) {
       slide = Math.floor((nativeEvent.contentOffset.x + screenWidth / 2) / screenWidth);
@@ -147,7 +143,7 @@ const EventScreen = () => {
             {filterVN(attraction.name.toLowerCase()).includes(searchIp.toLowerCase()) &&
               <View className={`flex flex-row px-4 py-4 items-center justify-between ${attraction.id % 2 == 0 ? 'bg-[#f1f1f1]' : ''}`}>
                 <Image
-                  src={attraction.image}
+                  source={{ uri: attraction.image }}
                   className='flex w-[150px] h-[100px] rounded-xl'
                 />
 
@@ -164,4 +160,4 @@ const EventScreen = () => {
   )
 }
 
-export default EventScreen;
+export default AttractionScreen;
