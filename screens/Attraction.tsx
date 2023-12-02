@@ -1,16 +1,35 @@
-import { Text, View, SafeAreaView, Image, TextInput, ScrollView, Dimensions } from 'react-native';
+import { Text, View, SafeAreaView, Image, TextInput, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import filterVN from '../filterVN';
 import { attractions } from '../data/index.js';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+export type RootStackParamList = {
+  AttractionDetail: { attraction: { id: number, name: string, description: string, image: any } } | undefined;
+};
 const screenWidth = Dimensions.get('window').width;
 
-interface Attraction {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-}
+// const attractions = [
+//   {
+//     id: 1,
+//     name: 'Đền Bái Đính',
+//     description: 'Đền Bái Đính là một ngôi đền lớn tại huyện Gia Viễn, tỉnh Ninh Bình, Việt Nam. Đền Bái Đính nằm ở núi Bái Sơn, cách trung tâm thành phố Ninh Bình khoảng 15 km về phía tây nam. Đền Bái Đính được xây dựng từ thế kỷ 11, thời kỳ Lý, nhưng đã bị thiêu hủy vào thời kỳ nhà Trần. Năm 2003, ngôi đền được xây dựng lại, và đến năm 2010, ngôi đền đã hoàn thành.',
+//     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Bai_Dinh_Pagoda_2019.jpg/800px-Bai_Dinh_Pagoda_2019.jpg'
+//   },
+//   {
+//     id: 2,
+//     name: 'Hang Múa',
+//     description: 'Hang Múa là một hang động nằm ở xã Ninh Xuân, huyện Hoa Lư, tỉnh Ninh Bình, cách trung tâm thành phố Ninh Bình khoảng 7 km về phía nam. Hang Múa có diện tích khoảng 800 m2, nằm ở độ cao 800 m so với mực nước biển, trên một ngọn núi có tên là Múa.',
+//     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Hang_Mua_2019.jpg/800px-Hang_Mua_2019.jpg'
+//   },
+//   {
+//     id: 3,
+//     name: 'Tràng An',
+//     description: 'Tràng An là một di sản văn hóa và thiên nhiên thế giới tại Việt Nam, nằm ở xã Ninh Hải, huyện Hoa Lư, tỉnh Ninh Bình, cách trung tâm thành phố Ninh Bình khoảng 7 km về phía nam. Di sản này được UNESCO công nhận vào ngày 23 tháng 6 năm 2014, trong kỳ họp thứ 38 của Ủy ban Di sản thế giới.',
+//   },
+// ];
 
 const AttractionScreen = () => {
 
@@ -18,6 +37,7 @@ const AttractionScreen = () => {
   let [active, setActive] = useState(0);
   const step = useRef<ScrollView>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     if (attractions.length > 0) {
@@ -67,7 +87,7 @@ const AttractionScreen = () => {
             attractions.map(attraction =>
               <View key={attraction.id}>
                 <Image
-                  source={{ uri: attraction.image }}
+                  source={attraction.image}
                   className='w-screen h-full'
                 />
               </View>
@@ -100,11 +120,11 @@ const AttractionScreen = () => {
 
       <ScrollView className='mt-4 mb-16'>
         {attractions.map(attraction => (
-          <View key={attraction.id}>
+          <TouchableOpacity key={attraction.id} onPress={() => navigation.navigate('AttractionDetail', { attraction })}>
             {filterVN(attraction.name.toLowerCase()).includes(searchIp.toLowerCase()) &&
               <View className={`flex flex-row px-4 py-4 items-center justify-between ${attraction.id % 2 == 0 ? 'bg-[#f1f1f1]' : ''}`}>
                 <Image
-                  source={{ uri: attraction.image }}
+                  source={attraction.image}
                   className='flex w-[150px] h-[100px] rounded-xl'
                 />
 
@@ -114,7 +134,7 @@ const AttractionScreen = () => {
                 </View>
               </View>
             }
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>
