@@ -2,6 +2,20 @@ import { Text, View, SafeAreaView, Image, TextInput, ScrollView } from 'react-na
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import filterVN from '../filterVN';
+import { TouchableOpacity } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+
+export type EventStackParamList = {
+  EventDetail:
+    {
+      event: {
+        name: string;
+        description: string;
+      };
+    }
+    
+};
 
 const EventScreen = () => {
 
@@ -47,6 +61,8 @@ const EventScreen = () => {
     },
   ]
 
+  const navigation = useNavigation<NativeStackNavigationProp<EventStackParamList>>();
+
   const filterEvent = events.filter(event => {
     return filterVN(event.name.toLowerCase()).includes(searchIp.toLowerCase())
   })
@@ -77,29 +93,20 @@ const EventScreen = () => {
       </View>
 
       <ScrollView className='mt-2 mb-[60px]'>
-        <View className={`flex flex-row px-4 py-4 items-center justify-between`}>
-          <Image className='w-[150px] h-[100px] rounded-xl animate-spin bg-gray-400'
-            source={{ uri: '' }}
-          />
-
-          <View className='text-center'>
-            <Text className='font-bold text-center text-xl'>123</Text>
-            <Text className='text-gray-500'>asd</Text>
-          </View>
-        </View>
-
         {filterEvent.map((event, id) => (
-          <View key={id} className={`flex flex-row px-4 py-4 items-center justify-between ${id % 2 == 0 ? 'bg-[#f1f1f1]' : ''}`}>
-            <Image alt=''
-              className='w-[150px] h-[100px] rounded-xl' 
-              source={{ uri: 'https://baoninhbinh.org.vn/DATA/ARTICLES/2022/11/15/-emagazine-su-kien-festival-trang-an-ket-noi-di-san-ninh-e07ee.jpg' }}
-            />
+          <TouchableOpacity key={id} onPress={() => navigation.navigate('EventDetail', { event })} >
+            <View className={`flex flex-row px-4 py-4 items-center justify-between ${id % 2 == 0 ? 'bg-[#f1f1f1]' : ''}`}>
+              <Image alt=''
+                className='w-[150px] h-[100px] rounded-xl' 
+                source={{ uri: 'https://baoninhbinh.org.vn/DATA/ARTICLES/2022/11/15/-emagazine-su-kien-festival-trang-an-ket-noi-di-san-ninh-e07ee.jpg' }}
+              />
 
-            <View className='text-center'>
-              <Text className='font-bold text-center text-xl'>{event.name}</Text>
-              <Text className='text-gray-500'>{event.description}</Text>
+              <View className='text-center'>
+                <Text className='font-bold text-center text-xl'>{event.name}</Text>
+                <Text className='text-gray-500'>{event.description}</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>
