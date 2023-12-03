@@ -42,6 +42,7 @@ const AttractionScreen = () => {
   const [idAttraction, setIdAttraction] = useState<number | null>(null);
   useEffect(() => {
     navigation.addListener("focus", () => {
+      setShowAttractionDetail(false);
       setShowMainComponent(false);
       setSearchIp("");
     });
