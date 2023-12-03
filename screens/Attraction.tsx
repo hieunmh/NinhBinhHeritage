@@ -11,7 +11,7 @@ import {
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import filterVN from "../filterVN";
-import { attractions } from "../data/index.js";
+import { attractions } from "../data/AttractionData";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AttractionDetail from "./AttractionDetail";

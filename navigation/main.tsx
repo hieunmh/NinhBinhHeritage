@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './tabs';
 import { StatusBar } from 'react-native';
 import AttractionDetail from '../screens/AttractionDetail';
+import EventDetail from '../screens/EventDetail';
+
 const Stack = createNativeStackNavigator();
 const MainNavigator = () => {
     return (
@@ -20,6 +22,13 @@ const MainNavigator = () => {
                 <Stack.Screen
                     name="AttractionDetail"
                     component={AttractionDetail as any}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="EventDetail"
+                    component={EventDetail as any}
                     options={{
                         headerShown: false,
                     }}
