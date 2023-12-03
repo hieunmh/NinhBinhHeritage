@@ -1,13 +1,13 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import EventScreen from '../screens/Event';
-import AttractionScreen from '../screens/Attraction';
-import MapScreen from '../screens/Map';
-import ServiceScreen from '../screens/Service';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import EventScreen from "../screens/Event";
+import AttractionScreen from "../screens/Attraction";
+import MapScreen from "../screens/Map";
+import ServiceScreen from "../screens/Service";
 
-import { Entypo } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,15 +23,16 @@ const Tabs = () => {
           borderRadius: 0,
           height: 60,
           paddingBottom: 5,
-          position: 'absolute',
+          position: "absolute",
         },
         tabBarHideOnKeyboard: true,
       }}
-
     >
-      <Tab.Screen name='Trang chủ' component={AttractionScreen}
+      <Tab.Screen
+        name="Trang chủ"
+        component={AttractionScreen}
         options={{
-          tabBarLabel: 'Trang chủ',
+          tabBarLabel: "Trang chủ",
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
@@ -40,14 +41,16 @@ const Tabs = () => {
               <MaterialCommunityIcons name="castle" size={24} color="#c0c8ca" />
             ),
           tabBarLabelStyle: {
-            fontSize: 12
-          }
+            fontSize: 12,
+          },
         }}
       />
 
-      <Tab.Screen name='Bản đồ' component={MapScreen}
+      <Tab.Screen
+        name="Bản đồ"
+        component={MapScreen}
         options={{
-          tabBarLabel: 'Bản đồ',
+          tabBarLabel: "Bản đồ",
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
@@ -56,14 +59,16 @@ const Tabs = () => {
               <FontAwesome5 name="map-marker-alt" size={24} color="#c0c8ca" />
             ),
           tabBarLabelStyle: {
-            fontSize: 12
-          }
+            fontSize: 12,
+          },
         }}
       />
 
-      <Tab.Screen name='Sự kiện' component={EventScreen}
+      <Tab.Screen
+        name="Sự kiện"
+        component={EventScreen}
         options={{
-          tabBarLabel: 'Sự kiện',
+          tabBarLabel: "Sự kiện",
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
@@ -72,14 +77,16 @@ const Tabs = () => {
               <FontAwesome5 name="calendar-day" size={24} color="#c0c8ca" />
             ),
           tabBarLabelStyle: {
-            fontSize: 12
-          }
+            fontSize: 12,
+          },
         }}
       />
 
-      <Tab.Screen name='Dịch vụ' component={ServiceScreen}
+      <Tab.Screen
+        name="Dịch vụ"
+        component={ServiceScreen}
         options={{
-          tabBarLabel: 'Dịch vụ',
+          tabBarLabel: "Dịch vụ",
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
@@ -88,13 +95,12 @@ const Tabs = () => {
               <AntDesign name="appstore1" size={24} color="#c0c8ca" />
             ),
           tabBarLabelStyle: {
-            fontSize: 12
-          }
+            fontSize: 12,
+          },
         }}
-
       />
     </Tab.Navigator>
-  )
-}
+  );
+};
 
 export default Tabs;
