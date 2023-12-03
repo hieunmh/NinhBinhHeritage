@@ -42,6 +42,7 @@ const AttractionScreen = () => {
   const [idAttraction, setIdAttraction] = useState<number | null>(null);
   useEffect(() => {
     navigation.addListener("focus", () => {
+      setShowAttractionDetail(false);
       setShowMainComponent(false);
       setSearchIp("");
     });
@@ -172,10 +173,10 @@ const AttractionScreen = () => {
                           />
                         </View>
                         <View className="gap text-xs font-bold tracking-tight text-white opacity-50">
-                          <Text className="flex text-center text-xl">
+                          <Text className="flex text-center text-xl font-bold">
                             {attraction.name}
                           </Text>
-                          <Text>
+                          <Text className="flex text-center">
                             {attraction.description.slice(0, 100) + "..."}
                           </Text>
                           <TouchableOpacity
