@@ -8,7 +8,6 @@ const Stack = createNativeStackNavigator();
 const MainNavigator = () => {
     return (
         <NavigationContainer>
-            <StatusBar hidden />
             <Stack.Navigator>
                 <Stack.Screen
                     name="Root"

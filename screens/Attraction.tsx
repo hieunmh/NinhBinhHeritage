@@ -18,15 +18,15 @@ import AttractionDetail from "./AttractionDetail";
 
 export type RootStackParamList = {
   AttractionDetail:
-    | {
-        attraction: {
-          id: number;
-          name: string;
-          description: string;
-          image: any;
-        };
-      }
-    | undefined;
+  | {
+    attraction: {
+      id: number;
+      name: string;
+      description: string;
+      image: any;
+    };
+  }
+  | undefined;
 };
 const screenWidth = Dimensions.get("window").width;
 
@@ -47,28 +47,26 @@ const AttractionScreen = () => {
     });
   }, [showMainComponent]);
   useEffect(() => {
-    if (step.current != null) {
-      if (attractions.length > 0) {
-        let index = 0;
-        const autoScroll = () => {
-          if (active === attractions.length - 1) {
-            step.current?.scrollTo({ x: 0, y: 0, animated: true });
-          } else {
-            step.current?.scrollTo({
-              x: (active + 1) * screenWidth,
-              y: 0,
-              animated: true,
-            });
-          }
-        };
-        intervalRef.current = setInterval(autoScroll, 3000);
+    if (attractions.length > 0) {
+      let index = 0;
+      const autoScroll = () => {
+        if (active === attractions.length - 1) {
+          step.current?.scrollTo({ x: 0, y: 0, animated: true });
+        } else {
+          step.current?.scrollTo({
+            x: (active + 1) * screenWidth,
+            y: 0,
+            animated: true,
+          });
+        }
+      };
+      intervalRef.current = setInterval(autoScroll, 3000);
 
-        return () => {
-          if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-          }
-        };
-      }
+      return () => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      };
     }
   }, [active]);
 
@@ -120,9 +118,8 @@ const AttractionScreen = () => {
                 {attractions.map((attraction, index) => (
                   <Text
                     key={index}
-                    className={`mx-2 text-xl ${
-                      index == active ? "text-orange-300" : "text-white"
-                    }`}
+                    className={`mx-2 text-xl ${index == active ? "text-orange-300" : "text-white"
+                      }`}
                   >
                     ⬤
                   </Text>
@@ -157,40 +154,39 @@ const AttractionScreen = () => {
                 {attractions.map((attraction, index) => (
                   <View
                     key={index}
-                    className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4 ${
-                      index % 2 == 0 ? "" : "bg-[#f1f1f1]"
-                    }`}
+                    className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4 ${index % 2 == 0 ? "" : "bg-[#f1f1f1]"
+                      }`}
                   >
                     {filterVN(attraction.name.toLowerCase()).includes(
                       searchIp.toLowerCase()
                     ) && (
-                      <>
-                        <View className="flex flex-col justify-center items-center">
-                          <Image
-                            source={attraction.image}
-                            className={`rounded w-[181px] h-[181px]`}
-                          />
-                        </View>
-                        <View className="gap text-xs font-bold tracking-tight text-white opacity-50">
-                          <Text className="flex text-center text-xl">
-                            {attraction.name}
-                          </Text>
-                          <Text>
-                            {attraction.description.slice(0, 100) + "..."}
-                          </Text>
-                          <TouchableOpacity
-                            onPress={() => {
-                              setIdAttraction(index);
-                              setShowAttractionDetail(true);
-                            }}
-                          >
-                            <Text className="flex text-center text-[#DC812D] font-bold">
-                              Xem thêm
+                        <>
+                          <View className="flex flex-col justify-center items-center">
+                            <Image
+                              source={attraction.image}
+                              className={`rounded w-[181px] h-[181px]`}
+                            />
+                          </View>
+                          <View className="gap text-xs font-bold tracking-tight text-white opacity-50">
+                            <Text className="flex font-bold text-center text-xl">
+                              {attraction.name}
                             </Text>
-                          </TouchableOpacity>
-                        </View>
-                      </>
-                    )}
+                            <Text>
+                              {attraction.description.slice(0, 100) + "..."}
+                            </Text>
+                            <TouchableOpacity
+                              onPress={() => {
+                                setIdAttraction(index);
+                                setShowAttractionDetail(true);
+                              }}
+                            >
+                              <Text className="flex text-center text-[#DC812D] font-bold">
+                                Xem thêm
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                        </>
+                      )}
                   </View>
                 ))}
               </View>
@@ -198,7 +194,7 @@ const AttractionScreen = () => {
           </>
         )
       ) : (
-        <View className="w-full ">
+        <View className="w-full">
           <Image
             className="h-full"
             source={require("../images/chuabaidinh.jpg")}
