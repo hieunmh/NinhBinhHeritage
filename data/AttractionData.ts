@@ -35,4 +35,10 @@ export const attractions = [
         description: 'Núi Non Nước (tên cổ là Dục Thúy Sơn), là một núi nhỏ nằm bên ngã ba sông, nơi sông Vân đổ vào sông Đáy, ở giữa cầu Non Nước và cầu Ninh Bình. Núi là một tiền đồn nằm ở cửa ngõ phía đông thành phố Ninh Bình. Lối lên đỉnh Non Nước qua 72 bậc gạch đá, chia làm 5 cấp. Đỉnh núi tương đối bằng phẳng, cây cối xanh mát, có lầu đón gió rất thuận tiện nghỉ ngơi, giải trí cho khách tham quan. Núi Non Nước đã được xếp hạng là di tích lịch sử và thắng cảnh cấp quốc gia đặc biệt quan trọng của Việt Nam,[1] cùng với núi Cá Voi, núi Cánh Diều và núi Kỳ Lân được mệnh danh là Tứ đại danh sơn - tức bốn ngọn núi nổi tiếng của thành phố Ninh Bình.[2]',
         image: require('../images/non-nuoc.jpg')
     },
+    {
+        id: 6,
+        name: 'Lễ hội cố đô Hoa Lư',
+        description: 'Thuộc danh sách các lễ hội ở Ninh Bình, lễ hội cố đô Hoa Lư là lễ hội lớn nhất trong năm được tổ chức tại Quảng trường trung tâm khu di tích văn hóa cố đô Hoa Lư tại huyện Trường Yên, Ninh Bình. Lễ hội thể hiện lòng yêu nước, bản sắc “Uống nước nhớ nguồn” đồng thời cũng giáo dục thế hể trẻ lòng biết ơn sâu sắc đến các anh hùng dân tộc đã có công giữ nước như vua Đinh Tiên Hoàng, vua Lê Đại Hành. Lễ hội thường được tổ chức vào ngày sinh của vua Đinh Tiên Hoàng vào ngày 15/2 âm lịch hoặc từ ngày 6/3-10/3 âm lịch',
+        image: require('../images/HoaLu.jpg')
+    },
 ]

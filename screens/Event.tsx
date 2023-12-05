@@ -1,10 +1,11 @@
 import { Text, View, SafeAreaView, Image, TextInput, ScrollView } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import filterVN from '../filterVN';
 import { TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import { supabase } from '../lib/supabase';
 
 export type EventStackParamList = {
   EventDetail:
@@ -65,6 +66,14 @@ const EventScreen = () => {
 
   const filterEvent = events.filter(event => {
     return filterVN(event.name.toLowerCase()).includes(searchIp.toLowerCase())
+  })
+
+  useEffect(() => {
+    const getEvent = async () => {
+      const { data, error } = await supabase.from('event').select('*').single();
+    }
+
+    getEvent();
   })
 
   return (
