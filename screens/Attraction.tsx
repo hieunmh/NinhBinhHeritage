@@ -15,6 +15,7 @@ import { attractions } from "../data/AttractionData";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AttractionDetail from "./AttractionDetail";
+import { supabase } from "../lib/supabase";
 
 export type RootStackParamList = {
   AttractionDetail:
@@ -70,6 +71,19 @@ const AttractionScreen = () => {
       };
     }
   }, [active]);
+
+  let [data, setData] = useState<any>();
+
+
+  useEffect(() => {
+    const getAttraction = async () => {
+      const { data, error } = await supabase.from("profiles").select()
+      console.log(data);
+      setData(data);
+    }
+
+    getAttraction();
+  })
 
   const onchange = (nativeEvent: any) => {
     let slide = 0;
