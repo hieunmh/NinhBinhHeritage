@@ -41,7 +41,7 @@ const EventScreen = () => {
   })
 
   return (
-    <SafeAreaView className="flex-1 bg-white relative pt-8">
+    <SafeAreaView className="flex-1 bg-white relative pt-6">
       <View className="flex flex-col items-center justify-between">
         <Image
           source={require('../images/chuabaidinh.jpg')}
@@ -74,8 +74,8 @@ const EventScreen = () => {
                 source={{ uri: event.image }}
               />
 
-              <View className='text-center flex-1'>
-                <Text className='font-bold text-center text-xl'>{event.name?.substring(0)}</Text>
+              <View className='ml-5 text-justify flex-1'>
+                <Text className='font-bold text-justify text-xl'>{event.name?.substring(0)}</Text>
                 {/* <Text className='text-gray-500 ml-5'>{event.description?.substring(0, 100)} ...</Text> */}
               </View>
             </View>
