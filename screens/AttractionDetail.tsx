@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { View, Text, Image, Button, SafeAreaView, Alert, ScrollView } from "react-native";
+import { View, Text, Image, Button, SafeAreaView, Alert, ScrollView, TouchableOpacity } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
@@ -34,16 +34,14 @@ const AttractionDetail: React.FC<AttractionDetailProps> = ({
   }, []);
   return (
     <SafeAreaView className="flex-1 bg-white relative">
-      <View className="sticky flex-row">
-        <View className="mx-2">
-          <AntDesign name="arrowleft" size={36} color="orange" onPress={() => {
-            setShowAttractionDetail(false);
-          }} />
-        </View>
+      <View className="flex-row">
         <View className="absolute m-auto left-0 right-0">
           <Text className="text-center text-orange-400 font-bold text-2xl">
             {attraction.name}
           </Text>
+        </View>
+        <View className="relative mx-2">
+          <AntDesign name="arrowleft" size={36} color="orange" onPress={() => setShowAttractionDetail(false)} />
         </View>
       </View>
       <View className="w-full h-1/3">
