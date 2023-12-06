@@ -6,14 +6,12 @@ import { TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { supabase } from '../lib/supabase';
+import { EventType } from '../types/eventType';
 
 export type EventStackParamList = {
   EventDetail:
     {
-      event: {
-        name: string;
-        description: string;
-      };
+      event: EventType
     }
     
 };
@@ -23,54 +21,20 @@ const EventScreen = () => {
   let [searchIp, setSearchIp] = useState('');
 
 
-  const events = [
-    {
-      name: 'trinh dien mua nuoc',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'trinh dien tieu nhac',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'trình tấu đại nhạc',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'trình diễn đại nhạc',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'triển lãm hóa thạch',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'lễ đổi gác',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'trình diễn đại nhạc',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'trình diễn đại nhạc',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-    {
-      name: 'trình diễn đại nhạc',
-      description: 'từ 8:30 đến 9:45 hằng ngày'
-    },
-  ]
+
+  let [events, setEvents] = useState<EventType[]>();
 
   const navigation = useNavigation<NativeStackNavigationProp<EventStackParamList>>();
 
-  const filterEvent = events.filter(event => {
-    return filterVN(event.name.toLowerCase()).includes(searchIp.toLowerCase())
+  const filterEvent = events?.filter(event => {
+    return filterVN(event.name?.toLowerCase() || '').includes(searchIp.toLowerCase())
+   
   })
 
   useEffect(() => {
     const getEvent = async () => {
-      const { data, error } = await supabase.from('event').select('*').single();
+      const { data, error } = await supabase.from('event').select() as unknown as { data: EventType[], error: any };
+      setEvents(data);
     }
 
     getEvent();
@@ -102,17 +66,17 @@ const EventScreen = () => {
       </View>
 
       <ScrollView className='mt-2 mb-[60px]'>
-        {filterEvent.map((event, id) => (
+        {filterEvent?.map((event, id) => (
           <TouchableOpacity key={id} onPress={() => navigation.navigate('EventDetail', { event })} >
             <View className={`flex flex-row px-4 py-4 items-center justify-between ${id % 2 == 0 ? 'bg-[#f1f1f1]' : ''}`}>
               <Image alt=''
                 className='w-[150px] h-[100px] rounded-xl' 
-                source={{ uri: 'https://baoninhbinh.org.vn/DATA/ARTICLES/2022/11/15/-emagazine-su-kien-festival-trang-an-ket-noi-di-san-ninh-e07ee.jpg' }}
+                source={{ uri: event.image }}
               />
 
-              <View className='text-center'>
-                <Text className='font-bold text-center text-xl'>{event.name}</Text>
-                <Text className='text-gray-500'>{event.description}</Text>
+              <View className='text-center flex-1'>
+                <Text className='font-bold text-center text-xl'>{event.name?.substring(0)}</Text>
+                {/* <Text className='text-gray-500 ml-5'>{event.description?.substring(0, 100)} ...</Text> */}
               </View>
             </View>
           </TouchableOpacity>
