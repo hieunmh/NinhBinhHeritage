@@ -77,8 +77,7 @@ const AttractionScreen = () => {
 
   useEffect(() => {
     const getAttraction = async () => {
-      const { data, error } = await supabase.from("profiles").select()
-      console.log(data);
+      const { data, error } = await supabase.from('attraction').select('*')
       setData(data);
     }
 
