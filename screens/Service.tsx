@@ -1,41 +1,48 @@
-import { Text, View, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import React from 'react';
+import ServiceItem from '../components/ServiceItem';
 
 const ServiceScreen = () => {
+  const listService = [
+    {
+      name: 'Vé điện tử',
+      icon: () => <Fontisto name="ticket" size={24} color="black" />,
+    },
+    {
+      name: 'Xe điện',
+      icon: () => <MaterialIcons name="electric-car" size={24} color="black" />,
+    },
+    {
+      name: 'Đồ ăn',
+      icon: () => <MaterialCommunityIcons name="food-turkey" size={24} color="black" />,
+    },
+    {
+      name: 'Hướng dẫn Audio',
+      icon: () => <FontAwesome name="headphones" size={24} color="black" />,
+    },
+    {
+      name: 'Tour',
+      icon: () => <MaterialCommunityIcons name="transit-detour" size={24} color="black" />,
+    },
+    {
+      name: 'Chụp ảnh',
+      icon: () => <Entypo name="camera" size={24} color="black" />,
+    }
+  ]
   return (
     <SafeAreaView>
       <View style={styles.header}>
         <Text style={styles.headerText}>Dịch vụ</Text>
       </View>
       <View style={styles.container}>
-        <View style={styles.item}>
-          <Fontisto name="ticket" size={24} color="black" />
-          <Text>Vé điện tử</Text>
-        </View>
-        <View style={styles.item}>
-          <MaterialIcons name="electric-car" size={24} color="black" />
-          <Text>Xe điện</Text>
-        </View>
-        <View style={styles.item}>
-          <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
-          <Text>Đồ ăn</Text>
-        </View>
-        <View style={styles.item}>
-          <FontAwesome name="headphones" size={24} color="black" />
-          <Text>Hướng dẫn Audio</Text>
-        </View>
-        <View style={styles.item}>
-          <MaterialCommunityIcons name="transit-detour" size={24} color="black" />
-          <Text>Tour</Text>
-        </View>
-        <View style={styles.item}>
-          <Entypo name="camera" size={24} color="black" />
-          <Text>Chụp ảnh</Text>
-        </View>
+        {listService.map((item, index) => {
+          return <ServiceItem key={index} name={item.name} icon={item.icon} />
+        })}
       </View>
     </SafeAreaView>
   )
@@ -68,5 +75,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
+
+const onPress = () => {
+  alert('Vé điện tử')
+}
 
 export default ServiceScreen;
