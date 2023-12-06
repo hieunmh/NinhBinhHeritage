@@ -1,14 +1,12 @@
 import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
-import { View, Text, Image, TouchableOpacity, Button } from "react-native";
+import { View, Text, Image, Button, ScrollView } from "react-native";
+import { EventType } from "../types/eventType";
 
 type EventStackParamList = {
   EventDetail: {
-    event: {
-      name: string,
-      description: string
-    }
+    event: EventType
   } 
 }
 
@@ -27,22 +25,27 @@ const EventDetail: React.FC<EventDetailProps> = ({ navigation, route }) => {
 
   return (
     <View className="w-full gap-4 mt-4">
-      <Button onPress={() => navigation.goBack()} title="Back" />
-      <View>
-        
-      </View>
-      <Image source={require('../images/HoaLu.jpg')} className="w-full h-1/2" />
-      <View className="gap text-xs font-bold tracking-tight text-white">
-        <Text className="flex text-center text-xl font-bold">
-          Lễ hội cố đô Hoa Lư
-          - Thời gian diễn ra: 15/2 âm lịch hoặc từ ngày 6/3 - 10/3 âm lịch
+      <Image alt='image' className="w-full h-[230px]"
+        source={{ uri: event.image }}
+      />
 
-          - Địa điểm: khu di tích văn hóa Cố đô Hoa Lư, huyện Trường Yên, tỉnh Ninh Bình.
-        </Text>
-        <Text className="flex text-center opacity-50">
-          k
-        </Text>
-      </View>
+      <ScrollView>
+        <View className="gap text-xs font-bold text-white">
+          <Text className="flex text-center text-3xl font-bold">
+            {event.name}
+          </Text>
+          <Text className="flex text-center text-lg">
+            {event.time}
+          </Text>
+          <Text className="flex text-center opacity-50 mb-4 text-lg">
+            { event.address }
+          </Text>
+          <Text className="flex text-center opacity-50 text-lg">
+            { event.description }
+          </Text>
+        </View>
+        <Button onPress={() => navigation.goBack()} title="Back" />
+      </ScrollView>
     </View>
   );
 };

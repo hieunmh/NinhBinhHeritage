@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AttractionDetail from "./AttractionDetail";
 import { supabase } from "../lib/supabase";
+import { AttractionType } from "../types/attractionType";
 
 export type RootStackParamList = {
   AttractionDetail:
@@ -74,13 +75,13 @@ const AttractionScreen = () => {
     }
   }, [active]);
 
-  let [data, setData] = useState<any>();
+  let [data, setData] = useState<AttractionType>();
 
 
   useEffect(() => {
     const getAttraction = async () => {
-      const { data, error } = await supabase.from("profiles").select()
-      console.log(data);
+      const { data, error } = await supabase.from("attraction").select() as unknown as { data: AttractionType, error: any }
+      // console.log(data);
       setData(data);
     }
 
