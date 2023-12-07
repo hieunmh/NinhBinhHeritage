@@ -3,15 +3,6 @@ import React from 'react'
 import { Fontisto } from '@expo/vector-icons';
 
 export default function ServiceItem(props: any) {
-  const styles = StyleSheet.create({
-    item: {
-      height: 100,
-      flexBasis: '33.333%',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  })
-
   const onPress = () => {
     alert(props.name)
   }
@@ -23,3 +14,13 @@ export default function ServiceItem(props: any) {
     </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  item: {
+    height: 100,
+    flexBasis: '33.333%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
+

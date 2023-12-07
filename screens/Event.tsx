@@ -41,7 +41,7 @@ const EventScreen = () => {
   }, [])
 
   return (
-    <SafeAreaView className="flex-1 bg-white relative pt-6">
+    <View className="flex-1 bg-white relative">
       <View className="flex flex-col items-center justify-between">
         <Image
           source={require('../images/chuabaidinh.jpg')}
@@ -82,7 +82,7 @@ const EventScreen = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 

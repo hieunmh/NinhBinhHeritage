@@ -2,14 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Tabs from './navigation/tabs';
-import MainNavigator from './navigation/main';
+import MainNavigator from './navigation/EventNavigator';
+import BottomNavigator from './navigation/BottomNavigator';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <MainNavigator />
+    <BottomNavigator />
   );
 }
 
