@@ -4,11 +4,11 @@ import { WebView } from 'react-native-webview';
 
 const MapScreen = () => {
   return (
-    <View className="flex-1 bg-white relative pt-8">
+    <SafeAreaView className="w-full flex-1 pt-6">
       <WebView
-        source={{ uri: 'https://www.openstreetmap.org/#map=19/21.03817/105.78329' }}
+        source={{ uri: 'https://www.google.com/maps/@9.779349,105.6189045,11z?hl=vi-VN&entry=ttu' }}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 

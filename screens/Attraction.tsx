@@ -20,19 +20,21 @@ import { AttractionType } from "../types/attractionType";
 
 export type RootStackParamList = {
   AttractionDetail:
-  | {
-    attraction: {
-      id: number;
-      name: string;
-      description: string;
-      image: any;
-    };
-  }
-  | undefined;
+    | {
+        // attraction: {
+        //   id: number;
+        //   name: string;
+        //   description: string;
+        //   image: any;
+        // };
+        attraction: AttractionType;
+      }
+    | undefined;
 };
 const screenWidth = Dimensions.get("window").width;
 
 const AttractionScreen = () => {
+  const numOfSlides = 5;
   let [searchIp, setSearchIp] = useState("");
   let [active, setActive] = useState(0);
   const step = useRef<ScrollView>(null);
@@ -41,50 +43,48 @@ const AttractionScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showMainComponent, setShowMainComponent] = useState(false);
   const [showAttractionDetail, setShowAttractionDetail] = useState(false);
-  const [idAttraction, setIdAttraction] = useState<number | null>(null);
+  const [currentAttraction, setCurrentAttraction] = useState<AttractionType>();
   useEffect(() => {
     navigation.addListener("focus", () => {
       setShowAttractionDetail(false);
-      setShowMainComponent(false);
       setSearchIp("");
     });
   }, [showMainComponent]);
   useEffect(() => {
-    if (attractions.length > 0) {
-      let index = 0;
-      const autoScroll = () => {
-        if (active === attractions.length - 1) {
-          step.current?.scrollTo({ x: 0, y: 0, animated: true });
-        } else {
-          step.current?.scrollTo({
-            x: (active + 1) * screenWidth,
-            y: 0,
-            animated: true,
-          });
-        }
-      };
-      intervalRef.current = setInterval(autoScroll, 3000);
+    let index = 0;
+    const autoScroll = () => {
+      if (active === numOfSlides) {
+        step.current?.scrollTo({ x: 0, y: 0, animated: true });
+      } else {
+        step.current?.scrollTo({
+          x: (active + 1) * screenWidth,
+          y: 0,
+          animated: true,
+        });
+      }
+    };
+    intervalRef.current = setInterval(autoScroll, 3000);
 
-      return () => {
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
-      };
-    }
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [active]);
 
-  let [data, setData] = useState<AttractionType>();
-
+  let [spbAttractions, setSpbAttractions] = useState<AttractionType[]>();
 
   useEffect(() => {
     const getAttraction = async () => {
-      const { data, error } = await supabase.from("attraction").select() as unknown as { data: AttractionType, error: any }
+      const { data, error } = (await supabase
+        .from("attraction")
+        .select()) as unknown as { data: AttractionType[]; error: any };
       // console.log(data);
-      setData(data);
-    }
+      setSpbAttractions(data);
+    };
 
     getAttraction();
-  })
+  }, []);
 
   const onchange = (nativeEvent: any) => {
     let slide = 0;
@@ -105,7 +105,7 @@ const AttractionScreen = () => {
       {showMainComponent ? (
         showAttractionDetail ? (
           <AttractionDetail
-            attraction={attractions[idAttraction!]}
+            attraction={currentAttraction}
             setShowAttractionDetail={setShowAttractionDetail}
           />
         ) : (
@@ -120,10 +120,10 @@ const AttractionScreen = () => {
                 className="flex w-full h-full"
                 ref={step}
               >
-                {attractions.map((attraction) => (
+                {spbAttractions?.map((attraction) => (
                   <View key={attraction.id}>
                     <Image
-                      source={attraction.image}
+                      source={{ uri: attraction.image }}
                       className="w-screen h-full"
                     />
                   </View>
@@ -131,15 +131,18 @@ const AttractionScreen = () => {
               </ScrollView>
 
               <View className="absolute flex-row bottom-[10%] self-center">
-                {attractions.map((attraction, index) => (
-                  <Text
-                    key={index}
-                    className={`mx-2 text-xl ${index == active ? "text-orange-300" : "text-white"
+                {spbAttractions
+                  ?.slice(0, numOfSlides + 1)
+                  .map((attraction, index) => (
+                    <Text
+                      key={index}
+                      className={`mx-2 text-xl ${
+                        index == active ? "text-orange-300" : "text-white"
                       }`}
-                  >
-                    ⬤
-                  </Text>
-                ))}
+                    >
+                      ⬤
+                    </Text>
+                  ))}
               </View>
             </View>
 
@@ -166,64 +169,86 @@ const AttractionScreen = () => {
               </View>
             </View>
             <ScrollView className="mt-4 mb-16">
-              <View className="gap-4">
-                {attractions.map((attraction, index) => (
-                  <View
-                    key={index}
-                    className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4 ${index % 2 == 0 ? "" : "bg-[#f1f1f1]"
-                      }`}
-                  >
-                    {filterVN(attraction.name.toLowerCase()).includes(
-                      searchIp.toLowerCase()
-                    ) && (
-                        <>
-                          <View className="flex flex-col justify-center items-center">
-                            <Image
-                              source={attraction.image}
-                              className={`rounded w-[181px] h-[181px]`}
-                            />
-                          </View>
-                          <View className="gap text-xs font-bold tracking-tight text-white opacity-50">
-                            <Text className="flex font-bold text-center text-xl">
-                              {attraction.name}
-                            </Text>
-                            <Text>
-                              {attraction.description.slice(0, 100) + "..."}
-                            </Text>
+              <View className="flex flex-row gap-2 items-start mr-4 p-2">
+                <View className="w-1/2">
+                  {spbAttractions?.map(
+                    (attraction, index) =>
+                      index % 2 == 0 && (
+                        <View key={index} className="flex w-full h-60">
+                          {filterVN(
+                            attraction.name?.toLowerCase() || ""
+                          ).includes(searchIp.toLowerCase()) && (
                             <TouchableOpacity
+                              className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
                               onPress={() => {
-                                setIdAttraction(index);
+                                setCurrentAttraction(attraction);
                                 setShowAttractionDetail(true);
                               }}
                             >
-                              <Text className="flex text-center text-[#DC812D] font-bold">
-                                Xem thêm
+                              <View className="flex flex-col justify-center items-center">
+                                <Image
+                                  source={{ uri: attraction.image }}
+                                  className={`rounded w-40 h-40`}
+                                />
+                              </View>
+                              <Text className="flex font-bold text-center text-sm">
+                                {attraction.name}
                               </Text>
                             </TouchableOpacity>
-                          </View>
-                        </>
-                      )}
-                  </View>
-                ))}
+                          )}
+                        </View>
+                      )
+                  )}
+                </View>
+                <View className="w-1/2">
+                  {spbAttractions?.map(
+                    (attraction, index) =>
+                      index % 2 == 1 && (
+                        <View key={index} className="flex w-full h-60">
+                          {filterVN(
+                            attraction.name?.toLowerCase() || ""
+                          ).includes(searchIp.toLowerCase()) && (
+                            <TouchableOpacity
+                              className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
+                              onPress={() => {
+                                setCurrentAttraction(attraction);
+                                setShowAttractionDetail(true);
+                              }}
+                            >
+                              <View className="flex flex-col justify-center items-center">
+                                <Image
+                                  source={{ uri: attraction.image }}
+                                  className={`rounded w-40 h-40`}
+                                />
+                              </View>
+                              <Text className="flex font-bold text-center text-sm">
+                                {attraction.name}
+                              </Text>
+                            </TouchableOpacity>
+                          )}
+                        </View>
+                      )
+                  )}
+                </View>
               </View>
             </ScrollView>
           </>
         )
       ) : (
-        <View className="w-full">
+        <View className="w-full mb-16">
           <Image
             className="h-full"
-            source={require("../images/chuabaidinh.jpg")}
+            source={require("../images/trangAn.jpg")}
           />
-          <View className="absolute w-fit bg-white/50 flex-col gap-2 items-center justify-center px-4 py-2 rounded-lg self-center bottom-[10%]">
-            <Text className=" w-fit text-4xl text-[#fca906] font-black">
+          <View className="absolute w-fit flex-col gap-2 items-center justify-center px-4 py-2 rounded-lg self-center bottom-[2%]">
+            <Text className=" w-fit text-3xl text-white font-black">
               Ninh Bình Heritage
             </Text>
             <TouchableOpacity
-              className="w-1/2 flex items-center rounded bg-[#fca906]"
+              className="w-full flex items-center rounded-3xl p-2 bg-white"
               onPress={() => setShowMainComponent(true)}
             >
-              <Text className="text-white text-3xl font-bold">Bắt đầu</Text>
+              <Text className="text-white text-3xl font-bold text-[#124e07]">Bắt đầu</Text>
             </TouchableOpacity>
           </View>
         </View>

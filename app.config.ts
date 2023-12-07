@@ -4,8 +4,8 @@ dotenv.config()
 export default ({ config }: ConfigContext): ExpoConfig => {
     return {
         ...config,
-        slug: 'supabook',
-        name: 'SupabaseBook',
+        slug: 'NinhBinhHeritage',
+        name: 'NinhBinhHeritage',
         extra: {
             ...config.extra,
             supabaseUrl: process.env.SUPABASE_URL,

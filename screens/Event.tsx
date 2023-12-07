@@ -10,10 +10,10 @@ import { EventType } from '../types/eventType';
 
 export type EventStackParamList = {
   EventDetail:
-    {
-      event: EventType
-    }
-    
+  {
+    event: EventType
+  }
+
 };
 
 const EventScreen = () => {
@@ -28,7 +28,7 @@ const EventScreen = () => {
 
   const filterEvent = events?.filter(event => {
     return filterVN(event.name?.toLowerCase() || '').includes(searchIp.toLowerCase())
-   
+
   })
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const EventScreen = () => {
     }
 
     getEvent();
-  })
+  }, [])
 
   return (
     <SafeAreaView className="flex-1 bg-white relative pt-6">
@@ -70,12 +70,12 @@ const EventScreen = () => {
           <TouchableOpacity key={id} onPress={() => navigation.navigate('EventDetail', { event })} >
             <View className={`flex flex-row px-4 py-4 items-center justify-between ${id % 2 == 0 ? 'bg-[#f1f1f1]' : ''}`}>
               <Image alt=''
-                className='w-[150px] h-[100px] rounded-xl' 
+                className='w-[150px] h-[100px] rounded-xl'
                 source={{ uri: event.image }}
               />
 
-              <View className='ml-5 text-justify flex-1'>
-                <Text className='font-bold text-justify text-xl'>{event.name?.substring(0)}</Text>
+              <View className='text-center flex-1'>
+                <Text className='font-bold text-center text-xl'>{event.name?.substring(0)}</Text>
                 {/* <Text className='text-gray-500 ml-5'>{event.description?.substring(0, 100)} ...</Text> */}
               </View>
             </View>
