@@ -1,17 +1,15 @@
 import {
   Text,
   View,
-  SafeAreaView,
   Image,
   TextInput,
   ScrollView,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesome, AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import filterVN from "../filterVN";
-import { attractions } from "../data/AttractionData";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AttractionDetail from "./AttractionDetail";
@@ -136,7 +134,7 @@ const AttractionScreen = () => {
                   .map((attraction, index) => (
                     <Text
                       key={index}
-                      className={`mx-2 text-xl ${index == active ? "text-orange-300" : "text-white"
+                      className={`mx-2 text-l opacity-50 ${index == active ? "text-orange-300" : "text-white"
                         }`}
                     >
                       ⬤

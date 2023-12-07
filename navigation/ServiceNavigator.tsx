@@ -7,48 +7,45 @@ import ElectricCarScreen from '../screens/ElectricCar';
 import FoodScreen from '../screens/Food';
 import AudioScreen from '../screens/Audio';
 import TourScreen from '../screens/Tour';
-import Colors from '../constants/Colors';
+import { Colors } from '../constants/Colors';
+import SettingScreen from '../screens/Setting';
 
 const Stack = createNativeStackNavigator();
 const ServiceNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName='Service'>
+    <Stack.Navigator
+      initialRouteName='Service'
+      screenOptions={{
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: Colors.light.yellow,
+        },
+        headerTitleStyle: {
+          color: '#fff',
+          fontSize: 20,
+          fontWeight: 'bold',
+        },
+        headerBackTitleVisible: false,
+      }}
+    >
       <Stack.Screen
         name="Service"
         component={ServiceScreen}
-        options={{
-          headerShown: true,
+        options={({ navigation }) => ({
           headerTitle: 'Dịch vụ',
           headerRight: () => (
-            <TouchableOpacity onPress={() => { alert('setting') }}>
+            <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
               <AntDesign name="setting" size={25} color="#fff" />
             </TouchableOpacity>
-          ),
-          headerStyle: {
-            backgroundColor: Colors.yellow,
-          },
-          headerTitleStyle: {
-            color: '#fff',
-            fontSize: 20,
-            fontWeight: 'bold',
-          },
-        }}
+          )
+        })}
       />
 
       <Stack.Screen
         name='Ticket'
         component={TicketScreen}
         options={{
-          headerShown: true,
           headerTitle: 'Vé điện tử',
-          headerStyle: {
-            backgroundColor: Colors.yellow,
-          },
-          headerTitleStyle: {
-            color: '#fff',
-            fontSize: 20,
-            fontWeight: 'bold',
-          },
         }}
       />
 
@@ -56,32 +53,14 @@ const ServiceNavigator = () => {
         name='ElectricCar'
         component={ElectricCarScreen}
         options={{
-          headerShown: true,
           headerTitle: 'Xe điện',
-          headerStyle: {
-            backgroundColor: Colors.yellow,
-          },
-          headerTitleStyle: {
-            color: '#fff',
-            fontSize: 20,
-            fontWeight: 'bold',
-          },
         }}
       />
       <Stack.Screen
         name='Food'
         component={FoodScreen}
         options={{
-          headerShown: true,
           headerTitle: 'Đồ ăn',
-          headerStyle: {
-            backgroundColor: Colors.yellow,
-          },
-          headerTitleStyle: {
-            color: '#fff',
-            fontSize: 20,
-            fontWeight: 'bold',
-          },
         }}
       />
 
@@ -89,16 +68,7 @@ const ServiceNavigator = () => {
         name='Audio'
         component={AudioScreen}
         options={{
-          headerShown: true,
           headerTitle: 'Adudio',
-          headerStyle: {
-            backgroundColor: Colors.yellow,
-          },
-          headerTitleStyle: {
-            color: '#fff',
-            fontSize: 20,
-            fontWeight: 'bold',
-          },
         }}
       />
 
@@ -106,20 +76,21 @@ const ServiceNavigator = () => {
         name='Tour'
         component={TourScreen}
         options={{
-          headerShown: true,
           headerTitle: 'Đặt tour',
-          headerStyle: {
-            backgroundColor: Colors.yellow,
-          },
-          headerTitleStyle: {
-            color: '#fff',
-            fontSize: 20,
-            fontWeight: 'bold',
-          },
+        }}
+      />
+
+      <Stack.Screen
+        name='Setting'
+        component={SettingScreen}
+        options={{
+          headerTitle: 'Cài đặt',
         }}
       />
 
     </Stack.Navigator>
   );
 };
+
+
 export default ServiceNavigator;
