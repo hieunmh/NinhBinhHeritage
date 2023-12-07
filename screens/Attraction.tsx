@@ -20,16 +20,16 @@ import { AttractionType } from "../types/attractionType";
 
 export type RootStackParamList = {
   AttractionDetail:
-  | {
-    // attraction: {
-    //   id: number;
-    //   name: string;
-    //   description: string;
-    //   image: any;
-    // };
-    attraction: AttractionType;
-  }
-  | undefined;
+    | {
+        // attraction: {
+        //   id: number;
+        //   name: string;
+        //   description: string;
+        //   image: any;
+        // };
+        attraction: AttractionType;
+      }
+    | undefined;
 };
 const screenWidth = Dimensions.get("window").width;
 
@@ -43,12 +43,13 @@ const AttractionScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showMainComponent, setShowMainComponent] = useState(false);
   const [showAttractionDetail, setShowAttractionDetail] = useState(false);
-  const [idAttraction, setIdAttraction] = useState<number | null>(null);
   const [currentAttraction, setCurrentAttraction] = useState<AttractionType>();
   useEffect(() => {
-    setShowAttractionDetail(false);
-    setSearchIp("");
-  }, []);
+    navigation.addListener("focus", () => {
+      setShowAttractionDetail(false);
+      setSearchIp("");
+    });
+  }, [showMainComponent]);
   useEffect(() => {
     let index = 0;
     const autoScroll = () => {
@@ -130,15 +131,18 @@ const AttractionScreen = () => {
               </ScrollView>
 
               <View className="absolute flex-row bottom-[10%] self-center">
-                {spbAttractions?.slice(0, numOfSlides + 1).map((attraction, index) => (
-                  <Text
-                    key={index}
-                    className={`mx-2 text-xl ${index == active ? "text-orange-300" : "text-white"
+                {spbAttractions
+                  ?.slice(0, numOfSlides + 1)
+                  .map((attraction, index) => (
+                    <Text
+                      key={index}
+                      className={`mx-2 text-xl ${
+                        index == active ? "text-orange-300" : "text-white"
                       }`}
-                  >
-                    ⬤
-                  </Text>
-                ))}
+                    >
+                      ⬤
+                    </Text>
+                  ))}
               </View>
             </View>
 
@@ -171,28 +175,27 @@ const AttractionScreen = () => {
                     (attraction, index) =>
                       index % 2 == 0 && (
                         <View key={index} className="flex w-full h-60">
-                          {filterVN(attraction.name?.toLowerCase() || "").includes(
-                            searchIp.toLowerCase()
-                          ) && (
-                              <TouchableOpacity
-                                className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
-                                onPress={() => {
-                                  // setIdAttraction(attraction.id);
-                                  setCurrentAttraction(attraction);
-                                  setShowAttractionDetail(true);
-                                }}
-                              >
-                                <View className="flex flex-col justify-center items-center">
-                                  <Image
-                                    source={{ uri: attraction.image }}
-                                    className={`rounded w-40 h-40`}
-                                  />
-                                </View>
-                                <Text className="flex font-bold text-center text-sm">
-                                  {attraction.name}
-                                </Text>
-                              </TouchableOpacity>
-                            )}
+                          {filterVN(
+                            attraction.name?.toLowerCase() || ""
+                          ).includes(searchIp.toLowerCase()) && (
+                            <TouchableOpacity
+                              className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
+                              onPress={() => {
+                                setCurrentAttraction(attraction);
+                                setShowAttractionDetail(true);
+                              }}
+                            >
+                              <View className="flex flex-col justify-center items-center">
+                                <Image
+                                  source={{ uri: attraction.image }}
+                                  className={`rounded w-40 h-40`}
+                                />
+                              </View>
+                              <Text className="flex font-bold text-center text-sm">
+                                {attraction.name}
+                              </Text>
+                            </TouchableOpacity>
+                          )}
                         </View>
                       )
                   )}
@@ -202,28 +205,27 @@ const AttractionScreen = () => {
                     (attraction, index) =>
                       index % 2 == 1 && (
                         <View key={index} className="flex w-full h-60">
-                          {filterVN((attraction.name?.toLowerCase() || "")).includes(
-                            searchIp.toLowerCase()
-                          ) && (
-                              <TouchableOpacity
-                                className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
-                                onPress={() => {
-                                  // setIdAttraction(attraction.id);
-                                  setCurrentAttraction(attraction);
-                                  setShowAttractionDetail(true);
-                                }}
-                              >
-                                <View className="flex flex-col justify-center items-center">
-                                  <Image
-                                    source={{ uri: attraction.image }}
-                                    className={`rounded w-40 h-40`}
-                                  />
-                                </View>
-                                <Text className="flex font-bold text-center text-sm">
-                                  {attraction.name}
-                                </Text>
-                              </TouchableOpacity>
-                            )}
+                          {filterVN(
+                            attraction.name?.toLowerCase() || ""
+                          ).includes(searchIp.toLowerCase()) && (
+                            <TouchableOpacity
+                              className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
+                              onPress={() => {
+                                setCurrentAttraction(attraction);
+                                setShowAttractionDetail(true);
+                              }}
+                            >
+                              <View className="flex flex-col justify-center items-center">
+                                <Image
+                                  source={{ uri: attraction.image }}
+                                  className={`rounded w-40 h-40`}
+                                />
+                              </View>
+                              <Text className="flex font-bold text-center text-sm">
+                                {attraction.name}
+                              </Text>
+                            </TouchableOpacity>
+                          )}
                         </View>
                       )
                   )}
@@ -233,20 +235,20 @@ const AttractionScreen = () => {
           </>
         )
       ) : (
-        <View className="w-full">
+        <View className="w-full mb-16">
           <Image
             className="h-full"
-            source={require("../images/chuabaidinh.jpg")}
+            source={require("../images/trangAn.jpg")}
           />
-          <View className="absolute w-fit bg-white/50 flex-col gap-2 items-center justify-center px-4 py-2 rounded-lg self-center bottom-[10%]">
-            <Text className=" w-fit text-4xl text-[#fca906] font-black">
+          <View className="absolute w-fit flex-col gap-2 items-center justify-center px-4 py-2 rounded-lg self-center bottom-[2%]">
+            <Text className=" w-fit text-3xl text-white font-black">
               Ninh Bình Heritage
             </Text>
             <TouchableOpacity
-              className="w-1/2 flex items-center rounded bg-[#fca906]"
+              className="w-full flex items-center rounded-3xl p-2 bg-white"
               onPress={() => setShowMainComponent(true)}
             >
-              <Text className="text-white text-3xl font-bold">Bắt đầu</Text>
+              <Text className="text-white text-3xl font-bold text-[#124e07]">Bắt đầu</Text>
             </TouchableOpacity>
           </View>
         </View>
