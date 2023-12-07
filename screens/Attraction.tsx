@@ -20,16 +20,16 @@ import { AttractionType } from "../types/attractionType";
 
 export type RootStackParamList = {
   AttractionDetail:
-    | {
-        // attraction: {
-        //   id: number;
-        //   name: string;
-        //   description: string;
-        //   image: any;
-        // };
-        attraction: AttractionType;
-      }
-    | undefined;
+  | {
+    // attraction: {
+    //   id: number;
+    //   name: string;
+    //   description: string;
+    //   image: any;
+    // };
+    attraction: AttractionType;
+  }
+  | undefined;
 };
 const screenWidth = Dimensions.get("window").width;
 
@@ -101,7 +101,7 @@ const AttractionScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white relative pt-8">
+    <View className="flex-1 bg-white relative">
       {showMainComponent ? (
         showAttractionDetail ? (
           <AttractionDetail
@@ -136,9 +136,8 @@ const AttractionScreen = () => {
                   .map((attraction, index) => (
                     <Text
                       key={index}
-                      className={`mx-2 text-xl ${
-                        index == active ? "text-orange-300" : "text-white"
-                      }`}
+                      className={`mx-2 text-xl ${index == active ? "text-orange-300" : "text-white"
+                        }`}
                     >
                       ⬤
                     </Text>
@@ -178,24 +177,24 @@ const AttractionScreen = () => {
                           {filterVN(
                             attraction.name?.toLowerCase() || ""
                           ).includes(searchIp.toLowerCase()) && (
-                            <TouchableOpacity
-                              className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
-                              onPress={() => {
-                                setCurrentAttraction(attraction);
-                                setShowAttractionDetail(true);
-                              }}
-                            >
-                              <View className="flex flex-col justify-center items-center">
-                                <Image
-                                  source={{ uri: attraction.image }}
-                                  className={`rounded w-40 h-40`}
-                                />
-                              </View>
-                              <Text className="flex font-bold text-center text-sm">
-                                {attraction.name}
-                              </Text>
-                            </TouchableOpacity>
-                          )}
+                              <TouchableOpacity
+                                className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
+                                onPress={() => {
+                                  setCurrentAttraction(attraction);
+                                  setShowAttractionDetail(true);
+                                }}
+                              >
+                                <View className="flex flex-col justify-center items-center">
+                                  <Image
+                                    source={{ uri: attraction.image }}
+                                    className={`rounded w-40 h-40`}
+                                  />
+                                </View>
+                                <Text className="flex font-bold text-center text-sm">
+                                  {attraction.name}
+                                </Text>
+                              </TouchableOpacity>
+                            )}
                         </View>
                       )
                   )}
@@ -208,24 +207,24 @@ const AttractionScreen = () => {
                           {filterVN(
                             attraction.name?.toLowerCase() || ""
                           ).includes(searchIp.toLowerCase()) && (
-                            <TouchableOpacity
-                              className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
-                              onPress={() => {
-                                setCurrentAttraction(attraction);
-                                setShowAttractionDetail(true);
-                              }}
-                            >
-                              <View className="flex flex-col justify-center items-center">
-                                <Image
-                                  source={{ uri: attraction.image }}
-                                  className={`rounded w-40 h-40`}
-                                />
-                              </View>
-                              <Text className="flex font-bold text-center text-sm">
-                                {attraction.name}
-                              </Text>
-                            </TouchableOpacity>
-                          )}
+                              <TouchableOpacity
+                                className={`h-fit flex flex-col justify-center items-center px-4 py-2 gap-4`}
+                                onPress={() => {
+                                  setCurrentAttraction(attraction);
+                                  setShowAttractionDetail(true);
+                                }}
+                              >
+                                <View className="flex flex-col justify-center items-center">
+                                  <Image
+                                    source={{ uri: attraction.image }}
+                                    className={`rounded w-40 h-40`}
+                                  />
+                                </View>
+                                <Text className="flex font-bold text-center text-sm">
+                                  {attraction.name}
+                                </Text>
+                              </TouchableOpacity>
+                            )}
                         </View>
                       )
                   )}
@@ -253,7 +252,7 @@ const AttractionScreen = () => {
           </View>
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 
