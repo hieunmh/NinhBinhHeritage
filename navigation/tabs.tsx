@@ -4,10 +4,11 @@ import AttractionScreen from "../screens/Attraction";
 import MapScreen from "../screens/Map";
 import ServiceScreen from "../screens/Service";
 
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Pressable } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -87,7 +88,6 @@ const Tabs = () => {
         component={ServiceScreen}
         options={{
           tabBarLabel: "Dịch vụ",
-          headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <AntDesign name="appstore1" size={24} color="#fca906" />
@@ -96,6 +96,27 @@ const Tabs = () => {
             ),
           tabBarLabelStyle: {
             fontSize: 12,
+          },
+          headerRight: () => (
+            <Pressable>
+              {({ pressed }) => (
+                <FontAwesome
+                  name="info-circle"
+                  size={25}
+                  // color={Colors[colorScheme ?? 'light'].text}
+                  style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                />
+              )}
+            </Pressable>
+          ),
+          headerStyle: {
+            backgroundColor: '#33EEFF',
+            shadowColor: 'transparent',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontSize: 20,
+            fontWeight: 'bold',
           },
         }}
       />

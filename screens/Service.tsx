@@ -36,9 +36,9 @@ const ServiceScreen = () => {
   ]
   return (
     <SafeAreaView>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={styles.headerText}>Dịch vụ</Text>
-      </View>
+      </View> */}
       <View style={styles.container}>
         {listService.map((item, index) => {
           return <ServiceItem key={index} name={item.name} icon={item.icon} />
