@@ -247,7 +247,7 @@ const AttractionScreen = () => {
               className="w-full flex items-center rounded-3xl p-2 bg-white"
               onPress={() => setShowMainComponent(true)}
             >
-              <Text className="text-white text-3xl font-bold text-[#124e07]">Bắt đầu</Text>
+              <Text className=" text-3xl font-bold text-[#124e07]">Bắt đầu</Text>
             </TouchableOpacity>
           </View>
         </View>
