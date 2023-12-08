@@ -8,7 +8,7 @@ export const Colors = {
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
-    yellow: '#fca906',
+    yellow: '#DC812D',
     icon: '#fff',
   },
   dark: {

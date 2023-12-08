@@ -2,7 +2,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AttractionScreen from '../screens/Attraction';
 import AttractionDetail from '../screens/AttractionDetail';
-import Colors from '../constants/Colors';
+import { Colors } from '../constants/Colors';
 
 const Stack = createNativeStackNavigator();
 const AttractionNavigator = () => {
@@ -22,7 +22,7 @@ const AttractionNavigator = () => {
           headerShown: true,
           headerTitle: 'Danh lam thắng cảnh',
           headerStyle: {
-            backgroundColor: Colors.yellow,
+            backgroundColor: Colors.light.yellow,
           },
           headerTitleStyle: {
             color: '#fff',
