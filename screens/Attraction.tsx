@@ -101,7 +101,7 @@ const AttractionScreen = () => {
   };
 
   return (
-    <View className="flex-1 bg-white relative">
+    <View className="flex-1 bg-white pt-6 relative">
       {showMainComponent ? (
         showAttractionDetail ? (
           <AttractionDetail

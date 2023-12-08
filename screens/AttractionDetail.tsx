@@ -29,7 +29,7 @@ const AttractionDetail: React.FC<AttractionDetailProps> = ({
     setPlaying((prev) => !prev);
   }, []);
   return (
-    <SafeAreaView className="flex-1 bg-white relative">
+    <SafeAreaView className="flex-1 bg-white pt-6 relative">
       <View className="flex-row">
         <View className="absolute m-auto left-0 right-0">
           <Text className="text-center text-orange-400 font-bold text-2xl">
