@@ -47,32 +47,32 @@ const styles = StyleSheet.create({
 const listService = [
   {
     name: 'Vé điện tử',
-    icon: () => <Fontisto name="ticket" size={24} color="black" />,
+    icon: () => <Fontisto name="ticket" size={27} color="white" />,
     router: 'Ticket'
   },
   {
     name: 'Xe điện',
-    icon: () => <MaterialIcons name="electric-car" size={24} color="black" />,
+    icon: () => <MaterialIcons name="electric-car" size={27} color="white" />,
     router: 'ElectricCar'
   },
   {
     name: 'Đồ ăn',
-    icon: () => <MaterialCommunityIcons name="food-turkey" size={24} color="black" />,
+    icon: () => <MaterialCommunityIcons name="food-turkey" size={27} color="white" />,
     router: 'Food'
   },
   {
     name: 'Hướng dẫn Audio',
-    icon: () => <FontAwesome name="headphones" size={24} color="black" />,
+    icon: () => <FontAwesome name="headphones" size={27} color="white" />,
     router: 'Audio'
   },
   {
     name: 'Tour',
-    icon: () => <MaterialCommunityIcons name="transit-detour" size={24} color="black" />,
+    icon: () => <MaterialCommunityIcons name="transit-detour" size={27} color="white" />,
     router: 'Tour'
   },
   {
     name: 'Chụp ảnh',
-    icon: () => <Entypo name="camera" size={24} color="black" />,
+    icon: () => <Entypo name="camera" size={27} color="white" />,
     router: 'Camera'
   }
 ]

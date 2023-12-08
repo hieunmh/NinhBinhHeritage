@@ -15,8 +15,8 @@ export default function ServiceItem(props: any) {
 
 const styles = StyleSheet.create({
   containerIcon: {
-    width: 55,
-    height: 55,
+    width: 60,
+    height: 60,
     borderRadius: 30,
     backgroundColor: '#33EEFF',
     alignItems: 'center',
@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
     flexBasis: '33.333%',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 20,
   },
 })
