@@ -1,13 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AttractionScreen from "../screens/Attraction";
 import MapScreen from "../screens/Map";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { NavigationContainer } from "@react-navigation/native";
 import EventNavigator from "./EventNavigator";
 import ServiceNavigator from "./ServiceNavigator";
+import AttractionNavigator from "./AttractionNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +30,7 @@ const BottomNavigator = () => {
     >
       <Tab.Screen
         name="Trang chủ"
-        component={AttractionScreen}
+        component={AttractionNavigator}
         options={{
           tabBarLabel: "Trang chủ",
           headerShown: false,
