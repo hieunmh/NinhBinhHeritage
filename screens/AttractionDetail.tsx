@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from "react";
 import { View, Text, Image, Button, SafeAreaView, Alert, ScrollView, TouchableOpacity } from "react-native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RouteProp } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
 import YoutubeIframe from "react-native-youtube-iframe";
 import { AttractionType } from "../types/attractionType";
