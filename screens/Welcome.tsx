@@ -10,7 +10,7 @@ const WelcomeScreen = ({ navigation }: any) => {
       />
       <View className="absolute w-fit px-4 py-2 rounded-lg self-center top-[15%]">
         <View className='flex-col gap-80 items-center justify-center'>
-          <Text className="text-3xl text-black font-black mb-60">
+          <Text className="text-3xl text-[#fca906] font-black mb-60">
             NINH BÌNH HERITAGE
           </Text>
           <TouchableOpacity

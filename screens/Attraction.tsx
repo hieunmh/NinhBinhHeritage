@@ -78,33 +78,33 @@ const AttractionScreen = () => {
   };
 
   return (
-    <View className="flex-1 bg-white pt-6 relative">
+    <View className="flex-1 bg-white relative">
       {showAttractionDetail ? (
-        <AttractionDetail
-          attraction={currentAttraction}
-          setShowAttractionDetail={setShowAttractionDetail}
-        />
-      ) : (
-        <>
-          <View className="w-full h-1/3">
-            <ScrollView
-              onScroll={({ nativeEvent }) => onchange(nativeEvent)}
-              scrollEventThrottle={16}
-              showsHorizontalScrollIndicator={false}
-              pagingEnabled
-              horizontal
-              className="flex w-full h-full"
-              ref={step}
-            >
-              {spbAttractions?.map((attraction) => (
-                <View key={attraction.id}>
-                  <Image
-                    source={{ uri: attraction.image }}
-                    className="w-screen h-full"
-                  />
-                </View>
-              ))}
-            </ScrollView>
+          <AttractionDetail
+            attraction={currentAttraction}
+            setShowAttractionDetail={setShowAttractionDetail}
+          />
+        ) : (
+          <>
+            <View className="w-full h-1/3">
+              <ScrollView
+                onScroll={({ nativeEvent }) => onchange(nativeEvent)}
+                scrollEventThrottle={16}
+                showsHorizontalScrollIndicator={false}
+                pagingEnabled
+                horizontal
+                className="flex w-full h-full"
+                ref={step}
+              >
+                {spbAttractions?.map((attraction) => (
+                  <View key={attraction.id}>
+                    <Image
+                      source={{ uri: attraction.image }}
+                      className="w-screen h-full"
+                    />
+                  </View>
+                ))}
+              </ScrollView>
 
             <View className="absolute flex-row bottom-[10%] self-center">
               {spbAttractions
@@ -208,25 +208,7 @@ const AttractionScreen = () => {
               </View>
             </ScrollView>
           </>
-        )
-      ) : (
-        <View className="w-full mb-16">
-          <Image
-            className="h-full"
-            source={require("../images/trangAn.jpg")}
-          />
-          <View className="absolute w-fit flex-col gap-2 items-center justify-center px-4 py-2 rounded-lg self-center bottom-[2%]">
-            <Text className=" w-fit text-3xl text-white font-black">
-              Ninh Bình Heritage
-            </Text>
-            <TouchableOpacity
-              className="w-full flex items-center rounded-3xl p-2 bg-white"
-              onPress={() => setShowMainComponent(true)}
-            >
-              <Text className="text-white text-3xl font-bold text-[#124e07]">Bắt đầu</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+
       )}
     </View>
   );
